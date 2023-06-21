@@ -26,7 +26,9 @@ const Header = ({ movie, genres}) => {
             <div className="background">
                 <img src={
                     apiConfig.originalImage(movie.backdrop_path)
-                } alt="" />
+                } alt={
+                    movie.title
+                } />
             </div>
             <div className="content">
                 <div className="left">
@@ -42,7 +44,6 @@ const Header = ({ movie, genres}) => {
                     </h1>
                     <div className="genres">
                         {
-                            // Afficher les 3 premiers genres
                             genres.map((genre, index) => {
                                 if (index < 3) {
                                     return (
@@ -68,17 +69,16 @@ const Header = ({ movie, genres}) => {
                     </div>
                     <div className="overview">
                         <h3>Synopsis</h3>
-                        <p>
-                            {
-                                movie.overview
-                            }
-                        </p>
+                        <p>{
+                            // Si le film n'a pas de synopsis
+                            movie.overview === "" ? "Aucun synopsis disponible" : movie.overview.substring(0, 300) + "..."
+                        }</p>
                     </div>
                     <div className="actor">
                         <div className="actorList">
                             {
                                 actors.map((actor, index) => {
-                                    if (index < 9) {
+                                    if (index < 12) {
                                         return (
                                             <div className="actor-item" key={actor.id}>
                                                 <h4>

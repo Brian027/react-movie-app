@@ -139,7 +139,7 @@ header .content .right .actor .actorList {
     width: 100%;
     margin: 2rem 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-content: space-between;
     gap: 1rem;
 }

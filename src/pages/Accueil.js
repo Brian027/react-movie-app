@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+// Components
+import Header from "../components/header/Header";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
+// Styles
 import "../styles/accueil.css";
+// API
 import axios from "axios";
 import apiConfig from "../api/apiConfig";
-import Header from "../components/header/Header";
+// jQuery
+import $ from "jquery";
+// Gsap
+import { gsap } from "gsap";
 
 function Accueil() {
   document.title = "React Movies | Accueil";
@@ -59,20 +66,45 @@ function Accueil() {
     }
   }, [searchValue]);
 
+  // Slider
+  const [current, setCurrent] = useState(0);
+  const length = movies.length;
+  const cardRef = useRef(null);
+
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+    // Animation avec Gsap
+    gsap.fromTo(
+      cardRef.current.children,
+      { x: 0, opacity: 1 },
+      { x: -100, opacity: 0, duration: 1 }
+    )
+    if (current === length - 1) {
+      setCurrent(0);
+    } else {
+      setCurrent(current + 1);
+    }
+  };
+
+  // Mettre une durée de 10 secondes entre chaque slide
+
+  useEffect(() => {
+    setTimeout(() => {
+      nextSlide();
+    }, 10000);
+  }, [current]);
+
   return (
     <>
       <div className="navigation">
         <Navbar searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
-      <div className="homeSection">
+      <div className="homeSection" ref={cardRef}>
         {
-          // Afficher UNIQUEMENT le premier film
-          movies.map((movie, index) => {
-            if (index === 6) {
+          movies && movies.map((movie, index) => {
+            if (index === current) {
               return (
-                <Header 
-                movie={movie} key={movie.id} genres={genres}
-                />
+                <Header movie={movie} genres={genres} key={movie.id} />
               )
             }
           })
