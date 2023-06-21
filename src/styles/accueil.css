@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Georama', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #212529;
+    background-color: rgb(15, 15, 15);
+}
+
+.movies {
+    padding: 6rem 0;
+    max-width: 1300px;
+    width: 80%;
+    margin: 0 auto;
+    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.movies h1 {
+    color: #fafafa;
+    font-size: 2rem;
+    font-weight: 600;
+}
